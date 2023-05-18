@@ -21,6 +21,18 @@ Create diffrent entities
 - Creating a graphical interface for managing NOSQL storage
 - Support for the extensibility of the NOSQL library via plugins
 - Integration of NOSQL library with various programming languages
+
+# Entity?
+Entity Framework is an Object Relational Mapping (ORM) tool that allows developers to work with databases using an object-oriented approach. However, this tool has its drawbacks:
+
+1. **Performance**: Entity Framework may be slower than working directly with the database. This is especially noticeable when performing complex queries.
+2. **Difficulty in setting up**: Setting up the Entity Framework can be difficult and take a lot of time. It is necessary to properly configure the database context, mappings and other parameters to get good performance.
+3. **Limitations in queries**: Entity Framework can sometimes limit the ability to write complex queries. For example, queries using multiple UNION operators can be difficult.
+4. **Migration Issues**: Migration issues may occur when updating the database model. Sometimes Entity Framework cannot apply changes to the database correctly, which leads to errors.
+5. **Debugging Complexity**: Debugging Entity Framework can be difficult. Errors may not be obvious and require a lot of time to fix them.
+
+In general, Entity Framework is a powerful tool that can speed up application development. However, developers should be careful when using it to avoid performance, configuration, and debugging issues.
+Since I myself faced a number of problems, I decided to create exactly what I need for my needs
 # Usage
      public class Users : ITable
         {
@@ -34,9 +46,6 @@ Create diffrent entities
             public int User { get; set; }
             public string Title { get; set; }
         }
-
-Create migrations
-
 
       public class Program
         {
