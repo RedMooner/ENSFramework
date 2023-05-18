@@ -1,5 +1,6 @@
 # EasyNoSql framework
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=23&pause=1000&width=435&lines=Create+your+databases+easier)](https://git.io/typing-svg)
+![Group 1 (1)](https://github.com/RedMooner/ENSFramework/assets/47520961/7f7e3a96-7b11-444e-b5d1-4e8140d36591)
+ [![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=23&pause=1000&width=435&lines=Create+your+databases+easier)](https://git.io/typing-svg)
 
 We are pleased to introduce our new library for creating NoSQL databases. This library is intended for developers who are looking for a simple and effective way to create a NoSQL database.
 
