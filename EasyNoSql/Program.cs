@@ -75,17 +75,22 @@ namespace ENS
     {
         int Id { get; set; }
     }
-
-    #region TESTING
-    public class Users : ITable
+    public abstract class Table<T> : ITable
     {
         public int Id { get; set; }
+        public static List<T> GetData()
+        {
+            return new List<T>();
+        }
+    }
+    #region TESTING
+    public class Users : Table<Users>
+    {
         public string Name { get; set; }
         public string Password { get; set; }
     }
-    public class Orders : ITable
+    public class Orders : Table<Orders>
     {
-        public int Id { get; set; }
         public int User { get; set; }
         public string Title { get; set; }
     }
