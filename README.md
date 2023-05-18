@@ -10,6 +10,17 @@ We are confident that our library will make the process of creating NoSQL databa
 
 Download our library right now and start creating your NoSQL databases today!
 Create diffrent entities   
+# Plans
+- Creation of documentation for NOSQL library
+- Study of existing solutions for NOSQL storage
+- Implementation of clustering support in the NOSQL library
+- Creation of a demo project based on the NOSQL library
+- Development of tests to test the functionality of the NOSQL library
+- Performance optimization of NOSQL library
+- Implementation of the data replication algorithm in the NOSQL library
+- Creating a graphical interface for managing NOSQL storage
+- Support for the extensibility of the NOSQL library via plugins
+- Integration of NOSQL library with various programming languages
 # Usage
      public class Users : ITable
         {
