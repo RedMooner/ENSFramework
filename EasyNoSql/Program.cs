@@ -82,6 +82,18 @@ namespace ENS
         {
             return new List<T>();
         }
+        public static void InsertData(T obj)
+        {
+
+        }
+        public static void DeleteData(T obj)
+        {
+
+        }
+        public static void UpdateData(T obj)
+        {
+
+        }
     }
     #region TESTING
     public class Users : Table<Users>
