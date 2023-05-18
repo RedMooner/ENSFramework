@@ -37,6 +37,6 @@ Create migrations
             }
         }
 
-## Example 
-![image](https://github.com/RedMooner/ENSFramework/assets/47520961/e8a39756-56f7-4a1c-8f4c-640747f8efad)
+
+
 
