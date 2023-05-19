@@ -1,9 +1,11 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Diagnostics;
 using System.Reflection;
+using System.Reflection.PortableExecutable;
 
 namespace ENS
 {
+   
     public class DataBase
     {
         #region Properties
@@ -13,7 +15,7 @@ namespace ENS
         private string Password { get; set; }
         private string Username { get; set; }
 
-        private MySqlConnection _connection;
+        private static MySqlConnection _connection;
         public DataBase(string name, int port, string server, string password, string username)
         {
             Name = name;
@@ -30,23 +32,28 @@ namespace ENS
         {
             try
             {
-                _connection = new MySqlConnection($"database={Name},server={Server},port={Port},username={Username},pwd={Password}");
+                _connection = new MySqlConnection($"server={Server};user={Username};database={Name};password={Password};Port={Port}");
                 _connection.Open();
                 _connection.Close();
             }
-            catch
+            catch (Exception ex)
             {
-                Debug.WriteLine("Connection creation error, please check logs!");
+                Debug.WriteLine("Connection creation error, please check logs! " + ex.Message);
             }
         }
         private bool CheckExistence()
         {
             return false;
         }
-        private MySqlDataReader Query(string sql)
+        public static MySqlDataReader Query(string sql)
         {
-            MySqlCommand command = new MySqlCommand(sql,_connection);
+            _connection.Open();
+            MySqlCommand command = new MySqlCommand(sql, _connection);
             return command.ExecuteReader();
+        }
+        private string TestConnection()
+        {
+            return _connection.State.ToString();
         }
         #endregion
         #region Migrations
@@ -69,18 +76,36 @@ namespace ENS
             }
         }
         #endregion
+        public static T MapToClass<T>(MySqlDataReader reader) where T : class
+        {
+            T returnedObject = Activator.CreateInstance<T>();
+            List<PropertyInfo> modelProperties = returnedObject.GetType().GetProperties().OrderBy(p => p.MetadataToken).ToList();
+            for (int i = 0; i < modelProperties.Count; i++)
+                modelProperties[i].SetValue(returnedObject, Convert.ChangeType(reader.GetValue(i), modelProperties[i].PropertyType), null);
+            return returnedObject;
+        }
     }
 
     public interface ITable
     {
         int Id { get; set; }
     }
-    public abstract class Table<T> : ITable
+    public abstract class Table<T> : ITable where T : class, new()
     {
         public int Id { get; set; }
         public static List<T> GetData()
         {
-            return new List<T>();
+            var reader = DataBase.Query("select * from " + typeof(T).Name);
+
+            List<T> list = new List<T>();
+           
+            T obj = new T();
+            while (reader.Read())
+            {
+                obj = DataBase.MapToClass<T>(reader);
+                list.Add(obj);
+            }
+            return list;
         }
         public static void InsertData(T obj)
         {
@@ -112,7 +137,7 @@ namespace ENS
         public static void Main(string[] args)
         {
             DataBase dataBase = new DataBase("test", 3307, "localhost", "", "root");
-            dataBase.Migrate();
+            Debug.WriteLine(Users.GetData()[0].Name);
             Console.Read();
         }
     }
