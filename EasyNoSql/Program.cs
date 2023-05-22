@@ -137,7 +137,7 @@ namespace ENS
         public static void Main(string[] args)
         {
             DataBase dataBase = new DataBase("test", 3307, "localhost", "", "root");
-            Debug.WriteLine(Users.GetData()[0].Name);
+            Debug.WriteLine(Users.GetData()[0].Id);
             Console.Read();
         }
     }
